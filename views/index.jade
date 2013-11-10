@@ -1,0 +1,88 @@
+extends layout
+
+block content
+  .navbar.navbar-default(role='navigation')
+    .navbar-header
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='#') Pictures App
+    .navbar-collapse.collapse
+      div#header
+  
+  #preloader
+    img(src="/images/ajax-loader.gif")
+  
+  #container
+    
+  //- Navbar
+  script(type="text/template" id="navbar")
+    ul.nav.navbar-nav
+      li
+        a(href="#/pictures/list") List Pictures 
+      li
+        a(href="#/pictures/upload") Upload 
+    ul.nav.navbar-nav.navbar-right
+      li
+        a(href="#pictures/list") 
+          | {{user_name}} 
+      li
+        a(href="#/logout") Logout
+  
+  //- Login
+      
+  script(type="text/template" id="login-form")
+    form.form-signin
+      h2.form-signin-heading Login
+      p#message try raphael:123 or zanluchi:123
+      input.form-control(type='text', placeholder='Username', required='required', autofocus='autofocus', name='user')
+      input.form-control(type='password', placeholder='Password', required='required', name='pass')
+      button.btn.btn-lg.btn-primary.btn-block(type='submit') Login
+          
+  //- Pictures
+  script(type="text/template" id="picture-upload-form")
+    h1 Upload Picture
+    form.form_horizontal(method='post', enctype='multipart/form-data', action='/upload_pic') 
+      div.form-group
+        label Picture 
+        input.form-control#pic(type="file", name="pic")
+      button.btn.btn-success(type='submit')
+        | Upload
+    
+    
+  script(type="text/template" id="pictures-list")
+    thead
+      tr
+        th Name
+        th Type
+        th Size
+        th Image
+        th
+    tbody
+  
+  script(type="text/template" id="picture-item")
+    td
+      | {{public_id}}
+    td
+      | {{format}}
+    td
+      | {{bytes}} bytes
+    td
+      img(src="{{url}}", height=50)
+    td
+      a(data-public_id="{{public_id}}", href="#")
+        | [remove]
+  
+  script(src='/javascripts/vendor/jquery.js')
+  script(src='/javascripts/vendor/jquery.cookie.js')
+  script(src='/javascripts/vendor/jquery.form.min.js')
+  script(src='/javascripts/vendor/bootstrap.min.js')
+  script(src='/javascripts/vendor/underscore.js')
+  script(src='/javascripts/vendor/handlebars.js')
+  script(src='/javascripts/vendor/backbone.js')
+  script(src='/javascripts/vendor/backbone.marionette.min.js')
+  script(src='/javascripts/app.js')
+  script(src='/javascripts/modules/login.js')
+  script(src='/javascripts/modules/pictures.js')
